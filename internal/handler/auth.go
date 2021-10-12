@@ -48,7 +48,7 @@ func (rc AuthHandler) LoginGoogle(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 }
 
-func (rc AuthHandler) CallbackFromGoole(w http.ResponseWriter, r *http.Request) {
+func (rc AuthHandler) CallbackFromGoogle(w http.ResponseWriter, r *http.Request) {
 	logger.Info("Callback from google")
 
 	state := r.FormValue("state")

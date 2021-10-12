@@ -21,7 +21,7 @@ func main() {
 	oauthConfGoogle := &oauth2.Config{
 		ClientID:     viper.GetString("google.clientID"),
 		ClientSecret: viper.GetString("google.clientSecret"),
-		RedirectURL:  fmt.Sprintf("http://localhost:%s/callback-gl", appPort),
+		RedirectURL:  fmt.Sprintf("http://localhost:%s/callback-google", appPort),
 		Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email"},
 		Endpoint:     google.Endpoint,
 	}
@@ -33,8 +33,8 @@ func main() {
 	AuthHandler := handler.NewAuthHandler(oauthConfGoogle, oauthStateStringGoogle)
 
 	router.HandleFunc("/", AuthHandler.MainView)
-	router.HandleFunc("/login-gl", AuthHandler.LoginGoogle)
-	router.HandleFunc("/callback-gl", AuthHandler.CallbackFromGoole)
+	router.HandleFunc("/login-google", AuthHandler.LoginGoogle)
+	router.HandleFunc("/callback-google", AuthHandler.CallbackFromGoogle)
 
 	server := new(http.Server)
 	server.Handler = router
